@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const addProduct = async (req,res) =>{
     try{
         const {title, price, description, image, category} = req.body;
@@ -23,4 +25,26 @@ export const addProduct = async (req,res) =>{
     }catch(err){
         return res.send(err);
     }
+}
+
+
+export const checkAPI = async (req,res) =>{
+    const options = {
+        method: 'GET',
+        url: 'https://youtube-search-and-download.p.rapidapi.com/channel/about',
+        params: {
+          id: 'UCE_M8A5yxnLfW0KghEeajjw'
+        },
+        headers: {
+          'X-RapidAPI-Key': 'eccd6d6feemsh2a777da29beaf15p14fe1ajsncb2464e044e6',
+          'X-RapidAPI-Host': 'youtube-search-and-download.p.rapidapi.com'
+        }
+      };
+      
+      try {
+          const response = await axios.request(options);
+          return res.send(response.data);
+      } catch (err) {
+          return res.send(err);
+      }
 }
